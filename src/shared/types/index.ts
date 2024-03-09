@@ -1,18 +1,15 @@
-export interface IGetGroupsResponse {
-  result: 1 | 0;
-  data?: IGroup[];
-}
+export type TGetGroupsResponse = TGroup[];
 
-export interface IGroup {
+export type TGroup = {
   id: number;
   name: string;
   closed: boolean;
   avatar_color?: string;
   members_count: number;
-  friends?: IUser[];
-}
+  friends?: TUser[];
+};
 
-export interface IUser {
+export type TUser = {
   first_name: string;
   last_name: string;
-}
+};
