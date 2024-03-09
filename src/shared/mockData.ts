@@ -1,6 +1,6 @@
-import { IGroup } from "../types";
+import { TGroup } from "./types";
 
-export const data: IGroup[] = [
+export const data: TGroup[] = [
   {
     id: 1,
     name: "Котики",
