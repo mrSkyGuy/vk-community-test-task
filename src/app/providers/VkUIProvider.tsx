@@ -7,7 +7,7 @@ type TVkUIProviderProps = {
 
 export function VkUIProvider({ children }: TVkUIProviderProps) {
   return (
-    <AppRoot mode="partial">
+    <AppRoot mode="full">
       <SplitLayout>{children}</SplitLayout>
     </AppRoot>
   );

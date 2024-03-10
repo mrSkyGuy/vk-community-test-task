@@ -1,0 +1,10 @@
+$default-bg: #aaa;
+$size: 30px;
+
+.avatar {
+	width: $size;
+	height: $size;
+	border-radius: 50%;
+	background-color: $default-bg;
+	border: 1px solid #fff;
+}

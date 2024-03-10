@@ -1,15 +1,20 @@
+import { Panel, PanelHeader, Group } from "@vkontakte/vkui";
 import { TGroup } from "../../../shared/types";
-import { Group } from "../../../app/entities/Group/ui";
+import { GroupItem } from "../../../entities/GroupItem/ui";
 
 type TGroupListProps = {
   groups: TGroup[];
+  id: string;
 };
-export function GroupList({ groups }: TGroupListProps) {
+export function GroupList({ groups, id }: TGroupListProps) {
   return (
-    <ul>
-      {groups.map((group) => (
-        <Group key={group.id} info={group} />
-      ))}
-    </ul>
+    <Panel id={id}>
+      <PanelHeader>Сообщества</PanelHeader>
+      <Group>
+        {groups.map((group) => (
+          <GroupItem key={group.id} info={group} />
+        ))}
+      </Group>
+    </Panel>
   );
 }

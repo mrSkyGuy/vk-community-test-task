@@ -1,8 +1,19 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+// Комменты выше нужны, чтобы не было ошибки из-за бага самой библиотеки. Пока не знаю, как можно
+// даже с помощью костылей починить
+
 import { useQuery } from "react-query";
+import { SplitCol, View } from "@vkontakte/vkui";
 import { apiClient } from "../../shared/api";
 import { GroupList } from "../../widgets/GroupList/ui";
+import { useContext } from "react";
+import { ActivePanelContext } from "../../shared/context/ActivePanelСontext";
+import { GroupDescription } from "../../widgets/GroupDescription/ui";
 
 export function Home() {
+  const { activePanel } = useContext(ActivePanelContext)!;
+
   const { status, data } = useQuery("group", () => apiClient.get("groups"), {
     retry: 2,
     retryDelay: 2000
@@ -14,8 +25,18 @@ export function Home() {
     case "loading":
       return <span>loading</span>;
     case "idle":
-      return <span>dile</span>;
+      return <span>idle</span>;
+
     case "success":
-      return <GroupList groups={data} />;
+      return (
+        <SplitCol>
+          <View activePanel={activePanel}>
+            <GroupList id="group-list" groups={data} />
+            {data.map((group) => (
+              <GroupDescription id={`group--${group.id}`} key={`group--${group.id}`} info={group} />
+            ))}
+          </View>
+        </SplitCol>
+      );
   }
 }
