@@ -5,5 +5,5 @@ type TAvatarProps = {
 };
 
 export function Avatar({ color }: TAvatarProps) {
-  return <div className={styles.avatar} style={color ? { backgroundColor: color } : {}} />;
+  return <div className={styles.avatar} style={{ backgroundColor: color }} />;
 }

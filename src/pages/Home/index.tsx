@@ -32,7 +32,7 @@ export function Home() {
 
     case "success":
       return (
-        <SplitCol>
+        <SplitCol maxWidth={500} style={{ margin: "auto" }}>
           <View activePanel={activePanel}>
             <GroupList id="group-list" groups={data} />
             {data.map((group) => (

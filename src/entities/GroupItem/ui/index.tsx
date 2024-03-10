@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { SimpleCell } from "@vkontakte/vkui";
+import { Title, Caption, HorizontalCell } from "@vkontakte/vkui";
+import { Icon16Users2Outline, Icon16LockOutline, Icon16UnlockOutline } from "@vkontakte/icons";
 import { ActivePanelContext } from "../../../shared/context/ActivePanelСontext";
 import { TGroup } from "../../../shared/types";
 import { Avatar } from "../../../shared/ui/Avatar/ui";
-import styles from "./index.module.scss";
 
 type TGroupItemProps = {
   info: TGroup;
@@ -13,14 +13,11 @@ export function GroupItem({ info }: TGroupItemProps) {
   const { setActivePanel } = useContext(ActivePanelContext)!;
 
   return (
-    <SimpleCell
+    <HorizontalCell
+      header={<Title level="3">{info.name}</Title>}
       onClick={() => setActivePanel(`group--${info.id}`)}
-      expandable="auto"
-      before={<Avatar color={info.avatar_color} />}
-      baseClassName={styles.groupItem}
-      hoverClassName={styles.hovered}
     >
-      {info.name}
-    </SimpleCell>
+      <Avatar color={info.avatar_color} />
+    </HorizontalCell>
   );
 }
