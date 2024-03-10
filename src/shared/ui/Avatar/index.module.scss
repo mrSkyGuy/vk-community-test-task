@@ -1,4 +1,4 @@
-$default-bg: #aaa;
+$default-bg: transparent;
 $size: 100px;
 
 .avatar {
@@ -6,5 +6,4 @@ $size: 100px;
 	height: $size;
 	border-radius: 50%;
 	background-color: $default-bg;
-	border: 1px solid #fff;
 }

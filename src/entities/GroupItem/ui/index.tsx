@@ -29,7 +29,12 @@ export function GroupItem({ info }: TGroupItemProps) {
         <div
           style={{ display: "flex", alignItems: "center", gap: "4px", justifyContent: "center" }}
         >
-          <Icon16Users2Outline /> {info.members_count} ({info.friends?.length ?? 0})
+          {info.members_count > 0 && (
+            <>
+              <Icon16Users2Outline /> {info.members_count}{" "}
+              {info.friends?.length && `(${info.friends.length})`}
+            </>
+          )}
         </div>
       }
       onClick={
