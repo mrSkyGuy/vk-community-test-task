@@ -14,14 +14,17 @@ import { GroupDescription } from "../../widgets/GroupDescription/ui";
 export function Home() {
   const { activePanel } = useContext(ActivePanelContext)!;
 
-  const { status, data } = useQuery("group", () => apiClient.get("groups"), {
-    retry: 2,
-    retryDelay: 2000
+  const { status, data, error, refetch } = useQuery("group", () => apiClient.get("groups"), {
+    retry: 0
   });
 
   switch (status) {
     case "error":
-      return <span>error</span>;
+      return (
+        <span onClick={refetch}>
+          Error: {error.code}; {error.message}
+        </span>
+      );
     case "loading":
       return <span>loading</span>;
     case "idle":

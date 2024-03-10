@@ -6,7 +6,12 @@ class ApiClient {
     return new Promise((res, rej) => {
       setTimeout(() => {
         const errorHappens = Math.random() > 0.5;
-        if (errorHappens) return rej();
+        if (errorHappens) {
+          return rej({
+            code: 500,
+            message: "сервер прилег поспать, попробуйте позже"
+          });
+        }
 
         switch (type) {
           case "groups":
