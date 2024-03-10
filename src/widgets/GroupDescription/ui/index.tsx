@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Group, Panel, PanelHeader, PanelHeaderBack, SimpleCell, Title } from "@vkontakte/vkui";
+import { Group, Panel, PanelHeader, PanelHeaderBack, Text } from "@vkontakte/vkui";
 import { ActivePanelContext } from "../../../shared/context/ActivePanelСontext";
 import { TGroup } from "../../../shared/types";
 
@@ -16,15 +16,15 @@ export function GroupDescription({ info, id }: TGroupDescriptionType) {
       <PanelHeader before={<PanelHeaderBack onClick={() => setActivePanel("group-list")} />}>
         {info.name}
       </PanelHeader>
-      <Group>
+      <Group style={{ padding: "18px" }}>
         {info.friends?.length ? (
           info.friends!.map((friend) => (
-            <Title key={friend.first_name + friend.last_name} Component="label">
+            <Text key={friend.first_name + friend.last_name} Component="label">
               {friend.first_name} {friend.last_name}
-            </Title>
+            </Text>
           ))
         ) : (
-          <SimpleCell Component="label">Здесь нет твоих друзей :(</SimpleCell>
+          <Text>Здесь нет твоих друзей :(</Text>
         )}
       </Group>
     </Panel>
