@@ -4,15 +4,17 @@
 // даже с помощью костылей починить
 
 import { useQuery } from "react-query";
-import { SplitCol, View } from "@vkontakte/vkui";
+import { SplitCol, View, SplitLayout } from "@vkontakte/vkui";
 import { apiClient } from "../../shared/api";
 import { GroupList } from "../../widgets/GroupList/ui";
 import { useContext } from "react";
 import { ActivePanelContext } from "../../shared/context/ActivePanelСontext";
 import { GroupDescription } from "../../widgets/GroupDescription/ui";
+import { isAlertOpenedContext } from "../../shared/context/IsAlertOpenedContext";
 
 export function Home() {
   const { activePanel } = useContext(ActivePanelContext)!;
+  const { alert } = useContext(isAlertOpenedContext)!;
 
   const { status, data, error, refetch } = useQuery("group", () => apiClient.get("groups"), {
     retry: 0
@@ -32,14 +34,20 @@ export function Home() {
 
     case "success":
       return (
-        <SplitCol maxWidth={500} style={{ margin: "auto" }}>
-          <View activePanel={activePanel}>
-            <GroupList id="group-list" groups={data} />
-            {data.map((group) => (
-              <GroupDescription id={`group--${group.id}`} key={`group--${group.id}`} info={group} />
-            ))}
-          </View>
-        </SplitCol>
+        <SplitLayout popout={alert}>
+          <SplitCol maxWidth={500} style={{ margin: "auto" }}>
+            <View activePanel={activePanel}>
+              <GroupList id="group-list" groups={data} />
+              {data.map((group) => (
+                <GroupDescription
+                  id={`group--${group.id}`}
+                  key={`group--${group.id}`}
+                  info={group}
+                />
+              ))}
+            </View>
+          </SplitCol>
+        </SplitLayout>
       );
   }
 }

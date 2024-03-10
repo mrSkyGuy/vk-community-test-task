@@ -1,4 +1,4 @@
-import { AppRoot, SplitLayout } from "@vkontakte/vkui";
+import { AppRoot } from "@vkontakte/vkui";
 import "@vkontakte/vkui/dist/vkui.css";
 
 type TVkUIProviderProps = {
@@ -6,9 +6,5 @@ type TVkUIProviderProps = {
 };
 
 export function VkUIProvider({ children }: TVkUIProviderProps) {
-  return (
-    <AppRoot mode="full">
-      <SplitLayout>{children}</SplitLayout>
-    </AppRoot>
-  );
+  return <AppRoot mode="full">{children}</AppRoot>;
 }
