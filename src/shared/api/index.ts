@@ -5,7 +5,7 @@ class ApiClient {
   async get(type: "groups"): Promise<TGetGroupsResponse> {
     return new Promise((res, rej) => {
       setTimeout(() => {
-        const errorHappens = Math.random() > 0.5;
+        const errorHappens = Math.random() > 1;
         if (errorHappens) {
           return rej({
             code: 500,
