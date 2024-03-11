@@ -6,11 +6,13 @@
 import { useQuery } from "react-query";
 import { SplitCol, View, SplitLayout } from "@vkontakte/vkui";
 import { apiClient } from "../../shared/api";
-import { GroupList } from "../../widgets/GroupList/ui";
+import { GroupList } from "../../widgets/GroupList";
 import { useContext } from "react";
 import { ActivePanelContext } from "../../shared/context/ActivePanelСontext";
-import { GroupDescription } from "../../widgets/GroupDescription/ui";
+import { GroupDescription } from "../../widgets/GroupDescription";
 import { isAlertOpenedContext } from "../../shared/context/IsAlertOpenedContext";
+import { Filters } from "../../features/Filters";
+import { Modal } from "./Modal";
 
 export function Home() {
   const { activePanel } = useContext(ActivePanelContext)!;
@@ -34,7 +36,14 @@ export function Home() {
 
     case "success":
       return (
-        <SplitLayout popout={alert}>
+        <SplitLayout
+          popout={alert}
+          modal={
+            <Modal>
+              <Filters id="filters" availableColors={["1", "2"]} />
+            </Modal>
+          }
+        >
           <SplitCol maxWidth={500} style={{ margin: "auto" }}>
             <View activePanel={activePanel}>
               <GroupList id="group-list" groups={data} />

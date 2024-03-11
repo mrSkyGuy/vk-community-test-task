@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Group, Panel, PanelHeader, PanelHeaderBack, Text } from "@vkontakte/vkui";
-import { ActivePanelContext } from "../../../shared/context/ActivePanelСontext";
-import { TGroup } from "../../../shared/types";
+import { ActivePanelContext } from "../../shared/context/ActivePanelСontext";
+import { TGroup } from "../../shared/types";
 
 type TGroupDescriptionType = {
   info: TGroup;
