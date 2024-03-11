@@ -1,6 +1,7 @@
-import { FormItem, RadioGroup, Radio, Checkbox, Title, ModalCard } from "@vkontakte/vkui";
-import { ChangeEvent, SyntheticEvent, useContext, useState } from "react";
-import { isModalOpenedContext } from "../../shared/context/IsModalOpenedContext";
+import { FormItem, RadioGroup, Radio, Title, ModalCard, ChipsSelect } from "@vkontakte/vkui";
+import { SyntheticEvent, useContext } from "react";
+import { IsModalOpenedContext } from "../../shared/context/IsModalOpenedContext";
+import { FiltersContext } from "../../shared/context/FiltersContext";
 
 type TFilterProps = {
   availableColors: string[];
@@ -9,31 +10,35 @@ type TFilterProps = {
 type TPrivacyType = "all" | "public" | "private";
 
 export function Filters({ availableColors, id }: TFilterProps) {
-  const [privacyType, setPrivacyType] = useState<TPrivacyType>("all");
-  const [choseAvatarColors, setChoseAvatarColors] = useState<string[]>([]);
-  const [friends, setFriends] = useState<boolean | null>(null);
-  const { setModal } = useContext(isModalOpenedContext)!;
+  const { filters, setFilters } = useContext(FiltersContext)!;
+  const { privacyType, choseAvatarColors, friends } = filters;
+  const { setModal } = useContext(IsModalOpenedContext)!;
 
   function onSubmit(e: SyntheticEvent) {
     e.preventDefault();
   }
 
   function onRadioChange(type: TPrivacyType) {
-    setPrivacyType(type);
+    setFilters((prev) => ({
+      ...prev,
+      privacyType: type
+    }));
   }
 
-  function onColorChoose(e: ChangeEvent<HTMLInputElement>) {
-    const currentColor = e.currentTarget.value;
-
-    setChoseAvatarColors((prev) => {
-      if (prev.includes(currentColor)) {
-        return [...prev].filter((item) => item !== currentColor);
-      } else {
-        const v = [...prev];
-        v.push(currentColor);
-        return v;
-      }
+  function onColorChoose(colors: { value: string; label: string }[]) {
+    setFilters((prev) => {
+      return {
+        ...prev,
+        choseAvatarColors: colors.map((color) => color.value)
+      };
     });
+  }
+
+  function onFriendsChange(type: null | boolean) {
+    setFilters((prev) => ({
+      ...prev,
+      friends: type
+    }));
   }
 
   return (
@@ -49,8 +54,8 @@ export function Filters({ availableColors, id }: TFilterProps) {
       dismissButtonMode="inside"
     >
       <form onSubmit={onSubmit}>
-        <FormItem top="Тип приватности">
-          <RadioGroup>
+        <FormItem top="Тип приватности" htmlFor="privacy-type--radio-group">
+          <RadioGroup id="privacy-type--radio-group">
             <Radio
               name="privacyType"
               value="all"
@@ -77,39 +82,30 @@ export function Filters({ availableColors, id }: TFilterProps) {
             </Radio>
           </RadioGroup>
         </FormItem>
-        <FormItem top="Цвет аватарки">
-          <Checkbox checked={choseAvatarColors.length === 0} disabled>
-            Любой
-          </Checkbox>
-          <Checkbox
-            checked={choseAvatarColors.includes("null")}
-            value="null"
-            onChange={onColorChoose}
-          >
-            Без аватарки
-          </Checkbox>
-          {Array.from(availableColors).map((color, index) => {
-            if (!color) return;
 
-            return (
-              <Checkbox
-                key={index}
-                value={color}
-                checked={choseAvatarColors.includes(color)}
-                onChange={onColorChoose}
-              >
-                {color}
-              </Checkbox>
-            );
-          })}
+        <FormItem top="Цвета аватарок" htmlFor="chose-avatar-colors--chips-select">
+          <ChipsSelect
+            id="chose-avatar-colors--chips-select"
+            placeholder="Все"
+            value={[...choseAvatarColors].map((value) => ({
+              value,
+              label: value
+            }))}
+            options={[...availableColors, "without"].map((value) => ({
+              value,
+              label: value
+            }))}
+            onChange={onColorChoose}
+          />
         </FormItem>
+
         <FormItem top="Есть друзья">
           <RadioGroup>
             <Radio
               name="friends"
               value="all"
               checked={friends === null}
-              onChange={() => setFriends(null)}
+              onChange={() => onFriendsChange(null)}
             >
               Все
             </Radio>
@@ -117,7 +113,7 @@ export function Filters({ availableColors, id }: TFilterProps) {
               name="friends"
               value="true"
               checked={friends === true}
-              onChange={() => setFriends(true)}
+              onChange={() => onFriendsChange(true)}
             >
               Да
             </Radio>
@@ -125,7 +121,7 @@ export function Filters({ availableColors, id }: TFilterProps) {
               name="friends"
               value="false"
               checked={friends === false}
-              onChange={() => setFriends(false)}
+              onChange={() => onFriendsChange(false)}
             >
               Нет
             </Radio>

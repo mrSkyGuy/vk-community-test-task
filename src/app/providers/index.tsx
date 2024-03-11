@@ -3,6 +3,7 @@ import { QueryClientProvider } from "./QueryClientProvider";
 import { ActivePanelProvider } from "./ActivePanelProvider";
 import { IsAlertOpenedProvider } from "./IsAlertOpenedProvider";
 import { IsModalOpenedProvider } from "./IsModalOpenedProvider";
+import { FiltersProvider } from "./FiltersProvider";
 
 type TProvidersProps = {
   children: React.ReactNode;
@@ -14,7 +15,9 @@ export function Providers({ children }: TProvidersProps) {
       <QueryClientProvider>
         <ActivePanelProvider>
           <IsAlertOpenedProvider>
-            <IsModalOpenedProvider>{children}</IsModalOpenedProvider>
+            <IsModalOpenedProvider>
+              <FiltersProvider>{children}</FiltersProvider>
+            </IsModalOpenedProvider>
           </IsAlertOpenedProvider>
         </ActivePanelProvider>
       </QueryClientProvider>

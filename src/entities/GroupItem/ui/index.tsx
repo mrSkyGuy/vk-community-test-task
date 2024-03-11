@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Title, HorizontalCell } from "@vkontakte/vkui";
 import { Icon16Users2Outline, Icon16LockOutline, Icon16UnlockOutline } from "@vkontakte/icons";
 import { ActivePanelContext } from "../../../shared/context/ActivePanelСontext";
-import { isAlertOpenedContext } from "../../../shared/context/IsAlertOpenedContext";
+import { IsAlertOpenedContext } from "../../../shared/context/IsAlertOpenedContext";
 import { TGroup } from "../../../shared/types";
 import { Avatar } from "../../../shared/ui/Avatar";
 import { Alert } from "../../../shared/ui/Alert";
@@ -13,7 +13,7 @@ type TGroupItemProps = {
 
 export function GroupItem({ info }: TGroupItemProps) {
   const { setActivePanel } = useContext(ActivePanelContext)!;
-  const { setAlert } = useContext(isAlertOpenedContext)!;
+  const { setAlert } = useContext(IsAlertOpenedContext)!;
 
   return (
     <HorizontalCell

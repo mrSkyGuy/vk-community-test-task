@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { Alert as VKAlert } from "@vkontakte/vkui";
-import { isAlertOpenedContext } from "../../context/IsAlertOpenedContext";
+import { IsAlertOpenedContext } from "../../context/IsAlertOpenedContext";
 
 type TAlertProps = {
   onSubmit: () => void;
 };
 
 export function Alert({ onSubmit }: TAlertProps) {
-  const { setAlert } = useContext(isAlertOpenedContext)!;
+  const { setAlert } = useContext(IsAlertOpenedContext)!;
   return (
     <VKAlert
       actions={[
@@ -25,6 +25,7 @@ export function Alert({ onSubmit }: TAlertProps) {
       actionsLayout="vertical"
       header="Остановись, ты же видишь это закрытая группа!!1!"
       text="Ты уверен, что тебе нужно посмотреть, что там? Помни, любопытной Варваре на базаре нос оторвали"
+      dismissButtonMode="inside"
     />
   );
 }
