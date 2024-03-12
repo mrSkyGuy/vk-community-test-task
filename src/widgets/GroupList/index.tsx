@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { IsModalOpenedContext } from "../../shared/context/IsModalOpenedContext";
 import { FiltersContext } from "../../shared/context/FiltersContext";
 import { Icon56CancelCircleOutline } from "@vkontakte/icons";
+import styles from "./index.module.css";
 
 type TGroupListProps = {
   groups: TGroup[];
@@ -54,17 +55,9 @@ export function GroupList({ groups, id }: TGroupListProps) {
       return fg.map((group) => <GroupItem key={group.id} info={group} />);
     }
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "auto"
-        }}
-      >
+      <div className={styles.centered + "." + styles.column}>
         <Icon56CancelCircleOutline />
-        <Title level="3" style={{ margin: "auto", textAlign: "center" }}>
+        <Title level="3" className={styles.centered + " " + styles.centering}>
           Ничего не нашлось :( Попробуй изменить фильтры
         </Title>
       </div>
@@ -92,7 +85,7 @@ export function GroupList({ groups, id }: TGroupListProps) {
           getScrollToLeft={(i) => i - 250}
           getScrollToRight={(i) => i + 250}
         >
-          <div style={{ display: "flex", gap: "50px" }}>{filteredGroups()}</div>
+          <div className={styles.groups}>{filteredGroups()}</div>
         </HorizontalScroll>
       </Group>
     </Panel>

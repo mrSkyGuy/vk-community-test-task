@@ -2,6 +2,7 @@ import { FormItem, RadioGroup, Radio, Title, ModalCard, ChipsSelect } from "@vko
 import { SyntheticEvent, useContext } from "react";
 import { IsModalOpenedContext } from "../../shared/context/IsModalOpenedContext";
 import { FiltersContext } from "../../shared/context/FiltersContext";
+import styles from "./index.module.css";
 
 type TFilterProps = {
   availableColors: string[];
@@ -44,7 +45,7 @@ export function Filters({ availableColors, id }: TFilterProps) {
   return (
     <ModalCard
       header={
-        <Title style={{ textAlign: "center" }} level="2">
+        <Title className={styles.centering} level="2">
           Фильтры
         </Title>
       }

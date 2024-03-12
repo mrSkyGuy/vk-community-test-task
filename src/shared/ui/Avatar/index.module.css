@@ -1,0 +1,11 @@
+:root {
+	--default-bg: transparent;
+  --size: 100px;
+}
+
+.avatar {
+	width: var(--size);
+	height: var(--size);
+	border-radius: 50%;
+	background-color: var(--default-bg);
+}

@@ -1,0 +1,19 @@
+.error {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.error .text {
+	text-align: center;
+}
+
+.error .button {
+	margin-top: 8px;
+}
+
+.centered {
+	margin: auto;
+}

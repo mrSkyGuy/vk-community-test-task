@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-$background: #111;
+:root {
+	--background: #111;
+}
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 	line-height: 24px;
-	background: $background;
+	background: var(--background);
 
 	transition: ease 200ms;
 }
