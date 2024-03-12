@@ -31,7 +31,8 @@ export function Home() {
   }
 
   const { status, data, refetch, error } = useQuery("group", () => apiClient.get("groups"), {
-    retry: 0
+    retry: 0,
+    staleTime: Infinity
   });
 
   return (
