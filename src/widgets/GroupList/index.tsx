@@ -1,9 +1,10 @@
-import { Panel, PanelHeader, Group, HorizontalScroll, Button, Text } from "@vkontakte/vkui";
+import { Panel, PanelHeader, Group, HorizontalScroll, Button, Title } from "@vkontakte/vkui";
 import { TGroup } from "../../shared/types";
 import { GroupItem } from "../../entities/GroupItem/ui";
 import { useContext } from "react";
 import { IsModalOpenedContext } from "../../shared/context/IsModalOpenedContext";
 import { FiltersContext } from "../../shared/context/FiltersContext";
+import { Icon56CancelCircleOutline } from "@vkontakte/icons";
 
 type TGroupListProps = {
   groups: TGroup[];
@@ -52,7 +53,22 @@ export function GroupList({ groups, id }: TGroupListProps) {
     if (fg.length > 0) {
       return fg.map((group) => <GroupItem key={group.id} info={group} />);
     }
-    return <Text style={{ margin: "auto" }}>Ничего не нашлось :( Попробуй изменить Фильтры</Text>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto"
+        }}
+      >
+        <Icon56CancelCircleOutline />
+        <Title level="3" style={{ margin: "auto", textAlign: "center" }}>
+          Ничего не нашлось :( Попробуй изменить фильтры
+        </Title>
+      </div>
+    );
   }
 
   return (

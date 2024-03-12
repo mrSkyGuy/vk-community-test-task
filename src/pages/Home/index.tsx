@@ -14,7 +14,7 @@ import { IsAlertOpenedContext } from "../../shared/context/IsAlertOpenedContext"
 import { Filters } from "../../features/Filters";
 import { Modal } from "./Modal";
 import { TGetGroupsResponse } from "../../shared/types";
-import { Icon56CancelCircleOutline } from "@vkontakte/icons";
+import { Icon56GlobeCrossOutline } from "@vkontakte/icons";
 
 export function Home() {
   const { activePanel } = useContext(ActivePanelContext)!;
@@ -56,9 +56,11 @@ export function Home() {
             margin: "auto"
           }}
         >
-          <Icon56CancelCircleOutline />
+          <Icon56GlobeCrossOutline />
           <Title level="2">Код ошибки: {error.code}</Title>
-          <Title level="3">Сообщение ошибки: {error.message}</Title>
+          <Title level="3" style={{ textAlign: "center" }}>
+            Сообщение ошибки: {error.message}
+          </Title>
           <Button size="l" onClick={refetch} style={{ marginTop: "8px" }}>
             Попробовать еще раз
           </Button>
